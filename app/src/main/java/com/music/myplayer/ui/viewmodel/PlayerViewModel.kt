@@ -16,14 +16,12 @@ import com.google.common.util.concurrent.MoreExecutors
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
-import kotlinx.coroutines.launch // ADICIONADO: Import essencial para o 'launch' funcionar!
-
+import kotlinx.coroutines.launch
 @OptIn(UnstableApi::class)
 class PlayerViewModel(context: Context) : ViewModel() {
 
     private val repository = MusicRepository(context)
 
-    // AJUSTADO: Nome mudado para '_musicas' e 'musicas' para combinar perfeitamente com a sua Screen
     private val _musicas = MutableStateFlow<List<Music>>(emptyList())
     val musicas: StateFlow<List<Music>> = _musicas.asStateFlow()
 

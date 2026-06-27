@@ -24,15 +24,14 @@ class MusicRepository(private val context: Context) {
                 "${MediaStore.Audio.Media.MIME_TYPE} = ? OR " +
                 "${MediaStore.Audio.Media.MIME_TYPE} = ?)"
 
-        // MODIFICADO: Passando os formatos que queremos buscar (MP3, M4A padrão e M4A alternativo)
         val argumentosSelecao = arrayOf("audio/mpeg", "audio/mp4", "audio/x-m4a")
 
         val cursor = context.contentResolver.query(
             uriTabela,
             projecao,
             selecao,
-            argumentosSelecao, // MODIFICADO: Passando os argumentos aqui em vez de deixar null
-            "${MediaStore.Audio.Media.TITLE} ASC" // Ordena por Título de A-Z
+            argumentosSelecao,
+            "${MediaStore.Audio.Media.TITLE} ASC"
         )
 
         cursor?.use { c ->
