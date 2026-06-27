@@ -1,3 +1,9 @@
+/**
+ * Screen composables for the music player UI.
+ *
+ * This file contains the main screen of the music player, header, track item component and
+ * miniature player component. It also defines theme colors used in the screen.
+ */
 package com.music.myplayer.ui.screen
 
 import android.Manifest
@@ -25,13 +31,32 @@ import com.google.accompanist.permissions.ExperimentalPermissionsApi
 import com.google.accompanist.permissions.isGranted
 import com.google.accompanist.permissions.rememberPermissionState
 
+/** Primary background color used throughout the player UI. */
 val FundoEscuro = Color(0xFF121212)
+
+/** Card background color used for panels and list items. */
 val CardEscuro = Color(0xFF1E1E1E)
+
+/** Neon purple accent used for highlight actions and gradients. */
 val RoxoNeon = Color(0xFF8E24AA)
+
+/** Cyan accent color used for secondary highlights. */
 val AzulCiano = Color(0xFF00ACC1)
+
+/** White color used for primary text content. */
 val TextoBranco = Color(0xFFFFFFFF)
+
+/** Gray color used for secondary text and disabled states. */
 val TextoCinza = Color(0xFFB3B3B3)
 
+/**
+ * Composable that displays the main music player screen.
+ *
+ * Requests audio permissions, observes playback state from the provided [PlayerViewModel],
+ * and renders the list of tracks and the miniature player.
+ *
+ * @param viewModel The [PlayerViewModel] instance providing music data and playback controls.
+ */
 @OptIn(ExperimentalPermissionsApi::class)
 @Composable
 fun MusicPlayerScreen(viewModel: PlayerViewModel) {
@@ -85,11 +110,12 @@ fun MusicPlayerScreen(viewModel: PlayerViewModel) {
                     ComponenteMiniPlayer(
                         musica = musica,
                         estaTocando = estaTocando,
+                        onVoltarClick = { viewModel.voltarMusica() },      // Conectado!
                         onPlayPauseClick = { viewModel.alternarPlayPause() },
-                        onProximaClick = { viewModel.proximaMusica() },
+                        onProximaClick = { viewModel.proximaMusica() },    // Conectado!
                         modifier = Modifier
                             .align(Alignment.BottomCenter)
-                            .padding(horizontal = 16.dp, vertical = 16.dp)
+                            .padding(start = 16.dp, end = 16.dp, top = 16.dp, bottom = 42.dp)
                     )
                 }
             }
@@ -109,6 +135,11 @@ fun MusicPlayerScreen(viewModel: PlayerViewModel) {
     }
 }
 
+/**
+ * Composable that renders the application header.
+ *
+ * Displays the app title and subtitle over a horizontal gradient background.
+ */
 @Composable
 fun HeaderDoApp() {
     Box(
@@ -124,6 +155,13 @@ fun HeaderDoApp() {
     }
 }
 
+/**
+ * Displays a single music item in the list.
+ *
+ * @param musica The [Music] object containing title and artist details.
+ * @param estaSelecionada Whether this item is currently selected.
+ * @param onClick Callback invoked when the item is tapped.
+ */
 @Composable
 fun ComponenteItemMusica(musica: Music, estaSelecionada: Boolean, onClick: () -> Unit) {
     val corBordaOuFundo = if (estaSelecionada) RoxoNeon.copy(alpha = 0.2f) else CardEscuro
@@ -180,12 +218,26 @@ fun ComponenteItemMusica(musica: Music, estaSelecionada: Boolean, onClick: () ->
     }
 }
 
+/**
+ * Renders the miniature player control panel.
+ *
+ * Displays the current track information and playback controls for previous, play/pause,
+ * and next actions.
+ *
+ * @param musica The current [Music] track displayed in the mini player.
+ * @param estaTocando Whether playback is currently active.
+ * @param onVoltarClick Callback invoked for the previous track action.
+ * @param onPlayPauseClick Callback invoked to toggle play or pause state.
+ * @param onProximaClick Callback invoked for the next track action.
+ * @param modifier Optional [Modifier] for layout adjustments.
+ */
 @Composable
 fun ComponenteMiniPlayer(
     musica: Music,
     estaTocando: Boolean,
+    onVoltarClick: () -> Unit,      // Adicionado
     onPlayPauseClick: () -> Unit,
-    onProximaClick: () -> Unit,
+    onProximaClick: () -> Unit,     // Adicionado
     modifier: Modifier = Modifier
 ) {
     Card(
@@ -201,6 +253,7 @@ fun ComponenteMiniPlayer(
             verticalAlignment = Alignment.CenterVertically,
             horizontalArrangement = Arrangement.SpaceBetween
         ) {
+            // Detalhes da música atual
             Column(modifier = Modifier.weight(1f)) {
                 Text(
                     text = musica.title,
@@ -219,23 +272,32 @@ fun ComponenteMiniPlayer(
                 )
             }
 
-            Row(verticalAlignment = Alignment.CenterVertically) {
+            // Barra de Controle: Voltar, Play/Pause, Avançar
+            Row(
+                verticalAlignment = Alignment.CenterVertically,
+                horizontalArrangement = Arrangement.spacedBy(4.dp)
+            ) {
+                // Botão VOLTAR (⏮)
+                IconButton(onClick = onVoltarClick) {
+                    Text(text = "⏮", color = AzulCiano, fontSize = 20.sp)
+                }
+
+                // Botão PLAY / PAUSE (Estilizado em círculo ou pílula)
                 Button(
                     onClick = onPlayPauseClick,
                     colors = ButtonDefaults.buttonColors(containerColor = RoxoNeon),
-                    contentPadding = PaddingValues(horizontal = 16.dp, vertical = 8.dp),
-                    modifier = Modifier.padding(end = 8.dp)
+                    contentPadding = PaddingValues(horizontal = 16.dp, vertical = 8.dp)
                 ) {
-                    Text(text = if (estaTocando) "Pause" else "Play", color = TextoBranco, fontWeight = FontWeight.Bold)
+                    Text(
+                        text = if (estaTocando) "Pause" else "Play",
+                        color = TextoBranco,
+                        fontWeight = FontWeight.Bold
+                    )
                 }
 
-                Button(
-                    onClick = onProximaClick,
-                    colors = ButtonDefaults.buttonColors(containerColor = CardEscuro),
-                    elevation = ButtonDefaults.buttonElevation(defaultElevation = 0.dp),
-                    contentPadding = PaddingValues(horizontal = 12.dp, vertical = 8.dp)
-                ) {
-                    Text(text = "➔", color = AzulCiano, fontWeight = FontWeight.Bold, fontSize = 18.sp)
+                // Botão AVANÇAR (⏭)
+                IconButton(onClick = onProximaClick) {
+                    Text(text = "⏭", color = AzulCiano, fontSize = 20.sp)
                 }
             }
         }

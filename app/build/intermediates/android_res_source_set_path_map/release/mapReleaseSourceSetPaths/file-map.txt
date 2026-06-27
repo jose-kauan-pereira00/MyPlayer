@@ -1,0 +1,8 @@
+com.music.myplayer.app-pngs-0 /home/zekauan/AndroidStudioProjects/MyPlayer/app/build/generated/res/pngs/release
+com.music.myplayer.app-updated_navigation_xml-1 /home/zekauan/AndroidStudioProjects/MyPlayer/app/build/generated/updated_navigation_xml/release
+com.music.myplayer.app-packageReleaseResources-2 /home/zekauan/AndroidStudioProjects/MyPlayer/app/build/intermediates/incremental/release/packageReleaseResources/merged.dir
+com.music.myplayer.app-packageReleaseResources-3 /home/zekauan/AndroidStudioProjects/MyPlayer/app/build/intermediates/incremental/release/packageReleaseResources/stripped.dir
+com.music.myplayer.app-release-4 /home/zekauan/AndroidStudioProjects/MyPlayer/app/build/intermediates/merged_res/release/mergeReleaseResources
+com.music.myplayer.app-main-5 /home/zekauan/AndroidStudioProjects/MyPlayer/app/src/main/res
+com.music.myplayer.app-release-6 /home/zekauan/AndroidStudioProjects/MyPlayer/app/src/release/res
+gradleHome-0 /home/zekauan/.gradle
