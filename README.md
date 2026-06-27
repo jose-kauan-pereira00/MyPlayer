@@ -1,36 +1,36 @@
 # MyPlayer
 
-MyPlayer é um reprodutor de mídia Android simples e leve desenvolvido em Kotlin (ou Java) para reprodução local e streaming de áudio e vídeo.
+MyPlayer is a simple and lightweight Android media player developed in Kotlin (or Java) for local playback and audio/video streaming.
 
-## Funcionalidades
- - Reproduzir arquivos de áudio e vídeo locais(mp3 / m4a)
- - Lista de reprodução simples
- - Controles básicos: play, pause, stop, próxima/anterior, seek
- - Informações básicas do arquivo (duração, posição)
+## Features
+ - Play local audio and video files (mp3 / m4a)
+ - Simple playlist
+ - Basic controls: play, pause, stop, next/previous, seek
+ - Basic file info (duration, position)
 
-## Tecnologias
+## Technologies
  - Android SDK
- - Exoplayer (recomendado) ou MediaPlayer
- - Kotlin (padrão) / Java
+ - ExoPlayer (recommended) or MediaPlayer
+ - Kotlin (default) / Java
 
-## Como usar
- 1. Clone o repositório:
+## How to use
+ 1. Clone the repository:
 
 	 git clone [Repository](https://github.com/jose-kauan-pereira00/MyPlayer.git)
 
- 2. Abra o projeto no Android Studio.
- 3. Configure o SDK e as dependências (ExoPlayer, permissões de armazenamento/Internet) no Gradle.
- 4. Construa e execute em um dispositivo ou emulador.
- 5. Diponibilazei um arquivo apk em Releases
+ 2. Open the project in Android Studio.
+ 3. Configure the SDK and dependencies (ExoPlayer, storage/Internet permissions) in Gradle.
+ 4. Build and run on a device or emulator.
+ 5. Upload an APK in Releases.
 
-## Permissões
- No AndroidManifest.xml certifique-se de incluir, quando necessário:
+## Permissions
+ In AndroidManifest.xml make sure to include, when needed:
 
  - INTERNET
- - READ_EXTERNAL_STORAGE (ou uso de Storage Access Framework para Android 10+)
+ - READ_EXTERNAL_STORAGE (or use Storage Access Framework for Android 10+)
 
-## Integração rápida (ExoPlayer)
- Exemplo mínimo de inicialização do ExoPlayer:
+## Quick integration (ExoPlayer)
+ Minimal example of ExoPlayer initialization:
 
  ```kotlin
  val player = ExoPlayer.Builder(context).build()
@@ -40,13 +40,13 @@ MyPlayer é um reprodutor de mídia Android simples e leve desenvolvido em Kotli
  player.play()
  ```
 
-## Estrutura sugerida
- - app/ - módulo Android principal
- - app/src/main/java/ - código-fonte
- - app/src/main/res/ - recursos (layouts, drawables)
- - README.md - este arquivo
+## Suggested structure
+ - app/ - main Android module
+ - app/src/main/java/ - source code
+ - app/src/main/res/ - resources (layouts, drawables)
+ - README.md - this file
 
-## Contribuição
- Pull requests são bem-vindos. Abra issues para bugs e sugestões.
+## Contribution
+ Pull requests are welcome. Open issues for bugs and suggestions.
 
 ---
